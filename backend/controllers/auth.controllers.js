@@ -21,12 +21,12 @@ try {
 
     const token=await genToken(user._id)
 
-    res.cookie("token",token,{
-        httpOnly:true,
-       maxAge:7*24*60*60*1000,
-       sameSite:"strict",
-       secure:false
-    })
+    res.cookie("token", token, {
+    httpOnly: true,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    sameSite: "none",
+    secure: true
+});
 
     return res.status(201).json(user)
 
@@ -51,12 +51,12 @@ try {
 
     const token=await genToken(user._id)
 
-    res.cookie("token",token,{
-        httpOnly:true,
-       maxAge:7*24*60*60*1000,
-       sameSite:"strict",
-       secure:false
-    })
+    res.cookie("token", token, {
+    httpOnly: true,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    sameSite: "none",
+    secure: true
+});
 
     return res.status(200).json(user)
 
@@ -65,12 +65,16 @@ try {
 }
 }
 
-export const logOut=async (req,res)=>{
+export const logOut = async (req, res) => {
     try {
-        res.clearCookie("token")
-         return res.status(200).json({message:"log out successfully"})
+        res.clearCookie("token", {
+            httpOnly: true,
+            sameSite: "none",
+            secure: true
+        });
+
+        return res.status(200).json({ message: "log out successfully" });
     } catch (error) {
-         return res.status(500).json({message:`logout error ${error}`})
+        return res.status(500).json({ message: `logout error ${error}` });
     }
 }
-        

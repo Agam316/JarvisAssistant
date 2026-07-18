@@ -14,7 +14,7 @@ dns.setServers(["1.1.1.1","8.8.8.8"])
 
 const app=express()
 app.use(cors({
-    origin: true,
+    origin: "https://jarvis-assistant-ten-ecru.vercel.app",
     credentials: true
 }))
 const port=process.env.PORT || 5000
